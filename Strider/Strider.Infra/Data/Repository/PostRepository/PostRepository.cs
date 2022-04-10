@@ -23,7 +23,7 @@ namespace Strider.Infra.Data.Repository.PostRepository
         public async Task CreatedAsync(Post post)
         {
             await _dataset.AddAsync(post);
-            await _dataContext.SaveChangesAsync();
+            _dataContext.SaveChangesAsync().Wait();
         }
     }
 }

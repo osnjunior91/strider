@@ -4,25 +4,27 @@ using Strider.Domain.Commands.Post.Commands;
 using Strider.Domain.Commands.Post.Validators;
 using Strider.Infra.Data.Repository.PostRepository;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Strider.Domain.Commands.Post.CommandHandlers
 {
-    public class CreatePostCommandHandler : ICommandHandler<CreatePostCommand>
+    public class CreateRepostCommandHandler : ICommandHandler<CreateRepostCommand>
     {
         private readonly IPostRepository _postRepository;
-        public CreatePostCommandHandler(IPostRepository postRepository)
+        public CreateRepostCommandHandler(IPostRepository postRepository)
         {
             _postRepository = postRepository;
         }
-
-        public async Task<CommandResult> Handle(CreatePostCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(CreateRepostCommand request, CancellationToken cancellationToken)
         {
-            var validator = new CreatePostCommandValidators();
+            var validator = new CreateRepostCommandValidators();
             validator.ValidateAndThrow(request);
-            var post = new Infra.Data.Model.Post(request.Text, DateTime.Now, request.UserId, 
-                null, null, null);
+            var post = new Infra.Data.Model.Post(request.Text, DateTime.Now, request.UserId,
+                null, request.RepostedFromId, null);
             await _postRepository.CreatedAsync(post);
             return new CommandResult(true, post);
         }
