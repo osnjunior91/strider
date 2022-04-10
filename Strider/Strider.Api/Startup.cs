@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Strider.Domain.Commands.Contracts;
 using Strider.Infra.Data.Context;
+using Strider.Infra.Data.Repository.PostRepository;
 using System.Reflection;
 
 namespace Strider.Api
@@ -26,6 +27,8 @@ namespace Strider.Api
         {
 
             services.AddControllers();
+            services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetValue<string>("ConnectionString")));
+            services.AddScoped<IPostRepository, PostRepository>();
             services.AddMediatR(typeof(Command).GetTypeInfo().Assembly);
             services.AddCors(co => co.AddPolicy("Policy", builder =>
             {
@@ -33,7 +36,6 @@ namespace Strider.Api
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
-            services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetValue<string>("ConnectionString")));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Strider.Api", Version = "v1" });

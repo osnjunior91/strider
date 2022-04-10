@@ -10,5 +10,19 @@ namespace Strider.Infra.Data.Model
         public User User { get; private set; }
         public Guid? RepostedFromId { get; private set; }
         public Post RepostedFrom { get; private set; }
+
+        public Post() { }
+
+        public Post(string text, DateTime created, Guid userId, User user, 
+            Guid? repostedFromId, Post repostedFrom)
+        {
+            Text = text;
+            Created = created;
+            UserId = userId;
+            User = user;
+            RepostedFromId = repostedFromId;
+            RepostedFrom = repostedFrom;
+        }
+
     }
 }

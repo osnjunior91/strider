@@ -1,6 +1,6 @@
 ﻿namespace Strider.Domain.Commands.Contracts
 {
-    public abstract class CommandResult
+    public class CommandResult
     {
         public object Data { get; private set; }
         public bool Success { get; private set; }
