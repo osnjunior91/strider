@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Strider.Infra.Data.Model
 {
@@ -7,6 +7,7 @@ namespace Strider.Infra.Data.Model
     {
         public Guid UserId { get; private set; }
         public User User { get; private set; }
-        public ICollection<User> FollowersList { get; private set; }
+        public Guid FollowerId { get; private set; }
+        public User Follower{ get; private set; }
     }
 }
