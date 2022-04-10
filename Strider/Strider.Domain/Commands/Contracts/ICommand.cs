@@ -1,7 +1,8 @@
-﻿namespace Strider.Domain.Commands.Contracts
+﻿using MediatR;
+
+namespace Strider.Domain.Commands.Contracts
 {
-    public interface ICommand
+    public interface ICommand : IRequest<CommandResult>
     {
-        bool Validate();
     }
 }

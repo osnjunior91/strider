@@ -12,8 +12,4 @@
     <ProjectReference Include="..\Strider.Domain\Strider.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>
