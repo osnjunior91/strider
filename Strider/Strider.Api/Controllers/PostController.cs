@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Strider.Api.Controllers
 {
-    [Route("api/post")]
+    [Route("api/v1/post")]
     [ApiController]
     public class PostController : ControllerBase
     {
@@ -18,6 +18,13 @@ namespace Strider.Api.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreatePostCommand command)
+        {
+            var result = _mediator.Send(command);
+            return Ok(result);
+        }
+        [HttpPost]
+        [Route("repost")]
+        public async Task<IActionResult> RePost([FromBody] CreateRepostCommand command)
         {
             var result = _mediator.Send(command);
             return Ok(result);

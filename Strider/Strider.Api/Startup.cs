@@ -29,6 +29,7 @@ namespace Strider.Api
             services.AddControllers();
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetValue<string>("ConnectionString")));
             services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<IFollowersRepository, FollowersRepository>();
             services.AddMediatR(typeof(Command).GetTypeInfo().Assembly);
             services.AddCors(co => co.AddPolicy("Policy", builder =>
             {

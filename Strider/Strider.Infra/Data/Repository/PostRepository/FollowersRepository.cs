@@ -5,20 +5,19 @@ using System.Threading.Tasks;
 
 namespace Strider.Infra.Data.Repository.PostRepository
 {
-    public class PostRepository : IPostRepository
+    public class FollowersRepository : IFollowersRepository
     {
         private readonly DataContext _dataContext;
-        private readonly DbSet<Post> _dataset;
+        private readonly DbSet<Followers> _dataset;
 
-        public PostRepository(DataContext dataContext)
+        public FollowersRepository(DataContext dataContext)
         {
             _dataContext = dataContext;
-            _dataset = dataContext.Set<Post>();
+            _dataset = dataContext.Set<Followers>();
         }
-
-        public async Task CreatedAsync(Post post)
+        public async Task CreatedAsync(Followers follower)
         {
-            await _dataset.AddAsync(post);
+            await _dataset.AddAsync(follower);
             _dataContext.SaveChangesAsync().Wait();
         }
     }
