@@ -3,7 +3,7 @@ using Strider.Domain.Commands.Contracts;
 using Strider.Domain.Commands.User.Commands;
 using Strider.Domain.Commands.User.Validators;
 using Strider.Infra.Data.Model;
-using Strider.Infra.Data.Repository.PostRepository;
+using Strider.Infra.Data.Repository.FollowersRepository;
 using System;
 using System.Threading;
 using System.Threading.Tasks;

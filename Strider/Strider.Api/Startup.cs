@@ -8,8 +8,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Strider.Domain.Commands.Contracts;
 using Strider.Infra.Data.Context;
+using Strider.Infra.Data.Repository.FollowersRepository;
 using Strider.Infra.Data.Repository.PostRepository;
+using Strider.Infra.Data.Repository.UserRepository;
 using System.Reflection;
+using Newtonsoft.Json.Serialization;
 
 namespace Strider.Api
 {
@@ -27,9 +30,11 @@ namespace Strider.Api
         {
 
             services.AddControllers();
+ 
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetValue<string>("ConnectionString")));
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<IFollowersRepository, FollowersRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddMediatR(typeof(Command).GetTypeInfo().Assembly);
             services.AddCors(co => co.AddPolicy("Policy", builder =>
             {

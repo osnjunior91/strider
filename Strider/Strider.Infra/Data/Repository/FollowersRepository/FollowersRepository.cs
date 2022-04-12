@@ -3,7 +3,7 @@ using Strider.Infra.Data.Context;
 using Strider.Infra.Data.Model;
 using System.Threading.Tasks;
 
-namespace Strider.Infra.Data.Repository.PostRepository
+namespace Strider.Infra.Data.Repository.FollowersRepository
 {
     public class FollowersRepository : IFollowersRepository
     {
