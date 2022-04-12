@@ -13,6 +13,7 @@ using Strider.Infra.Data.Repository.PostRepository;
 using Strider.Infra.Data.Repository.UserRepository;
 using System.Reflection;
 using Newtonsoft.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Strider.Api
 {
@@ -29,7 +30,11 @@ namespace Strider.Api
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddJsonOptions(options => 
+                {
+                    options.JsonSerializerOptions.WriteIndented = true;
+                });
  
             services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration.GetValue<string>("ConnectionString")));
             services.AddScoped<IPostRepository, PostRepository>();

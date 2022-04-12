@@ -22,7 +22,7 @@ namespace Strider.Api.Controllers
         [Route("follow")]
         public async Task<IActionResult> FollowAsync([FromBody] FollowCommand command)
         {
-            var result = _mediator.Send(command);
+            var result = await _mediator.Send(command);
             return Ok(result);
         }
 
@@ -30,7 +30,7 @@ namespace Strider.Api.Controllers
         [Route("/{id}")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
-            var result = _mediator.Send(new GetUserByIdQuery(id));
+            var result = await _mediator.Send(new GetUserByIdQuery(id));
             return Ok(result);
         }
 

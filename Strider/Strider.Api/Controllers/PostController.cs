@@ -19,14 +19,14 @@ namespace Strider.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreatePostCommand command)
         {
-            var result = _mediator.Send(command);
+            var result = await _mediator.Send(command);
             return Ok(result);
         }
         [HttpPost]
         [Route("repost")]
         public async Task<IActionResult> RePost([FromBody] CreateRepostCommand command)
         {
-            var result = _mediator.Send(command);
+            var result = await _mediator.Send(command);
             return Ok(result);
         }
     }

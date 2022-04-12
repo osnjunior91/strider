@@ -22,7 +22,7 @@ namespace Strider.Infra.Data.Repository.UserRepository
         }
         public async Task<User> FirstOrDefaultAsync(Expression<Func<User, bool>> filter)
         {
-            return await _dataset.FirstOrDefaultAsync(filter);
+            return await _dataset.SingleOrDefaultAsync(filter);
         }
     }
 }

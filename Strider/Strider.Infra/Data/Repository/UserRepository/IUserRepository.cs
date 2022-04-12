@@ -7,6 +7,6 @@ namespace Strider.Infra.Data.Repository.UserRepository
 {
     public interface IUserRepository : IRepository<User>
     {
-        Task<User> FirstOrDefaultAsync(Expression<Func<User, bool>> filter);
+       Task<User> FirstOrDefaultAsync(Expression<Func<User, bool>> filter);
     }
 }
