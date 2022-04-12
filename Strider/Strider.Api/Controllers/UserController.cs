@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Strider.Domain.Commands.User.Commands;
+using Strider.Domain.Queries.Users.Queries;
+using System;
 using System.Threading.Tasks;
 
 namespace Strider.Api.Controllers
@@ -23,6 +25,15 @@ namespace Strider.Api.Controllers
             var result = _mediator.Send(command);
             return Ok(result);
         }
+
+        [HttpGet]
+        [Route("/{id}")]
+        public async Task<IActionResult> GetByIdAsync(Guid id)
+        {
+            var result = _mediator.Send(new GetUserByIdQuery(id));
+            return Ok(result);
+        }
+
 
     }
 }
