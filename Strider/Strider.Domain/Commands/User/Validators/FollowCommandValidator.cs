@@ -4,12 +4,7 @@ using Strider.Domain.Commands.User.Commands;
 
 namespace Strider.Domain.Commands.User.Validators
 {
-    public class FollowCommandValidator : CommandValidator<FollowCommand>
+    public class FollowCommandValidator : FollowBaseCommandValidator<FollowCommand>
     {
-        public FollowCommandValidator()
-        {
-            RuleFor(x => x.UserId).NotEmpty().NotNull();
-            RuleFor(x => x.UserFollowId).NotEmpty().NotNull();
-        }
     }
 }

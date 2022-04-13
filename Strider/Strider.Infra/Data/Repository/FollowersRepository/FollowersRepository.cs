@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Strider.Infra.Data.Context;
 using Strider.Infra.Data.Model;
+using System;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Strider.Infra.Data.Repository.FollowersRepository
@@ -19,6 +21,17 @@ namespace Strider.Infra.Data.Repository.FollowersRepository
         {
             await _dataset.AddAsync(follower);
             _dataContext.SaveChangesAsync().Wait();
+        }
+
+        public async Task DeleteAsync(Followers follower)
+        {
+            _dataset.Remove(follower);
+            await _dataContext.SaveChangesAsync();
+        }
+
+        public async Task<Followers> FirstOrDefaultAsync(Expression<Func<Followers, bool>> filter)
+        {
+            return await _dataset.SingleOrDefaultAsync(filter);
         }
     }
 }

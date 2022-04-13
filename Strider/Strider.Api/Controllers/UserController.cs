@@ -27,6 +27,14 @@ namespace Strider.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost]
+        [Route("unfollow")]
+        public async Task<IActionResult> UnFollowAsync([FromBody] FollowCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
         [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
