@@ -2,7 +2,7 @@
 
 namespace Strider.Domain.Commands.Post.Validators
 {
-    public class CreatePostCommandValidators : PostCommandValidator<CreatePostCommand>
+    public class CreatePostCommandValidators : PostCommandValidators<CreatePostCommand>
     {
     }
 }

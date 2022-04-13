@@ -4,7 +4,7 @@ using Strider.Domain.Commands.Post.Commands;
 
 namespace Strider.Domain.Commands.Post.Validators
 {
-    public class CreateRepostCommandValidators : PostCommandValidator<CreateRepostCommand>
+    public class CreateRepostCommandValidators : PostCommandValidators<CreateRepostCommand>
     {
         public CreateRepostCommandValidators() : base()
         {
