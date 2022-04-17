@@ -58,7 +58,6 @@ namespace Strider.Infrastructure.Data.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RepostedFromId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -84,17 +83,17 @@ namespace Strider.Infrastructure.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "CreatedAt", "DeleteAt", "IsDelete", "Joined", "Username" },
-                values: new object[] { new Guid("da3e5d4b-0284-4e6c-8ee8-7d1073f1ddad"), new DateTime(2022, 4, 17, 10, 55, 29, 111, DateTimeKind.Local).AddTicks(2763), null, false, new DateTime(2022, 4, 17, 10, 55, 29, 112, DateTimeKind.Local).AddTicks(8943), "User01" });
+                values: new object[] { new Guid("7a045dcd-1381-4b7f-8007-e30c096ec1a7"), new DateTime(2022, 4, 17, 11, 2, 58, 275, DateTimeKind.Local).AddTicks(871), null, false, new DateTime(2022, 4, 17, 11, 2, 58, 276, DateTimeKind.Local).AddTicks(2374), "User01" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "CreatedAt", "DeleteAt", "IsDelete", "Joined", "Username" },
-                values: new object[] { new Guid("28f93b4f-3942-4b6c-8ddd-1d8d68c3beb3"), new DateTime(2022, 4, 17, 10, 55, 29, 112, DateTimeKind.Local).AddTicks(9418), null, false, new DateTime(2022, 4, 17, 10, 55, 29, 112, DateTimeKind.Local).AddTicks(9424), "User02" });
+                values: new object[] { new Guid("f15c54ee-0343-4cec-a751-70b97359c442"), new DateTime(2022, 4, 17, 11, 2, 58, 276, DateTimeKind.Local).AddTicks(2776), null, false, new DateTime(2022, 4, 17, 11, 2, 58, 276, DateTimeKind.Local).AddTicks(2781), "User02" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "CreatedAt", "DeleteAt", "IsDelete", "Joined", "Username" },
-                values: new object[] { new Guid("ffb92f3c-b7f1-487d-b9eb-e17f5049f7d1"), new DateTime(2022, 4, 17, 10, 55, 29, 112, DateTimeKind.Local).AddTicks(9427), null, false, new DateTime(2022, 4, 17, 10, 55, 29, 112, DateTimeKind.Local).AddTicks(9429), "User03" });
+                values: new object[] { new Guid("257863a5-c106-44dd-ab19-5a82ba4974b0"), new DateTime(2022, 4, 17, 11, 2, 58, 276, DateTimeKind.Local).AddTicks(2784), null, false, new DateTime(2022, 4, 17, 11, 2, 58, 276, DateTimeKind.Local).AddTicks(2785), "User03" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Followers_FollowerId",

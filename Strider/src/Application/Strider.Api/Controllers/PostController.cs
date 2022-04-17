@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Nivello.Lib.Nivello.Application;
 using Strider.Domain.Commands.Post.Commands;
+using Strider.Domain.Queries.Post.Queries;
 using System.Threading.Tasks;
 
 namespace Strider.Api.Controllers
@@ -28,6 +29,12 @@ namespace Strider.Api.Controllers
         public async Task<IActionResult> RePost([FromBody] CreateRepostCommand command)
         {
             return ReturnCommandApi(await _mediator.Send(command));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            return ReturnQueryApi(await _mediator.Send(new GetAllPostsQuery()));
         }
     }
 }

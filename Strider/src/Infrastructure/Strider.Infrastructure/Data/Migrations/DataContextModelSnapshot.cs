@@ -61,12 +61,11 @@ namespace Strider.Infrastructure.Data.Migrations
                     b.Property<DateTime?>("DeleteAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
+
+                    b.Property<Guid?>("RepostedFromId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Text")
                         .HasColumnType("nvarchar(max)");
@@ -76,11 +75,11 @@ namespace Strider.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RepostedFromId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Posts");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Post");
                 });
 
             modelBuilder.Entity("Strider.Infrastructure.Data.Model.User", b =>
@@ -111,40 +110,28 @@ namespace Strider.Infrastructure.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("da3e5d4b-0284-4e6c-8ee8-7d1073f1ddad"),
-                            CreatedAt = new DateTime(2022, 4, 17, 10, 55, 29, 111, DateTimeKind.Local).AddTicks(2763),
+                            Id = new Guid("7a045dcd-1381-4b7f-8007-e30c096ec1a7"),
+                            CreatedAt = new DateTime(2022, 4, 17, 11, 2, 58, 275, DateTimeKind.Local).AddTicks(871),
                             IsDelete = false,
-                            Joined = new DateTime(2022, 4, 17, 10, 55, 29, 112, DateTimeKind.Local).AddTicks(8943),
+                            Joined = new DateTime(2022, 4, 17, 11, 2, 58, 276, DateTimeKind.Local).AddTicks(2374),
                             Username = "User01"
                         },
                         new
                         {
-                            Id = new Guid("28f93b4f-3942-4b6c-8ddd-1d8d68c3beb3"),
-                            CreatedAt = new DateTime(2022, 4, 17, 10, 55, 29, 112, DateTimeKind.Local).AddTicks(9418),
+                            Id = new Guid("f15c54ee-0343-4cec-a751-70b97359c442"),
+                            CreatedAt = new DateTime(2022, 4, 17, 11, 2, 58, 276, DateTimeKind.Local).AddTicks(2776),
                             IsDelete = false,
-                            Joined = new DateTime(2022, 4, 17, 10, 55, 29, 112, DateTimeKind.Local).AddTicks(9424),
+                            Joined = new DateTime(2022, 4, 17, 11, 2, 58, 276, DateTimeKind.Local).AddTicks(2781),
                             Username = "User02"
                         },
                         new
                         {
-                            Id = new Guid("ffb92f3c-b7f1-487d-b9eb-e17f5049f7d1"),
-                            CreatedAt = new DateTime(2022, 4, 17, 10, 55, 29, 112, DateTimeKind.Local).AddTicks(9427),
+                            Id = new Guid("257863a5-c106-44dd-ab19-5a82ba4974b0"),
+                            CreatedAt = new DateTime(2022, 4, 17, 11, 2, 58, 276, DateTimeKind.Local).AddTicks(2784),
                             IsDelete = false,
-                            Joined = new DateTime(2022, 4, 17, 10, 55, 29, 112, DateTimeKind.Local).AddTicks(9429),
+                            Joined = new DateTime(2022, 4, 17, 11, 2, 58, 276, DateTimeKind.Local).AddTicks(2785),
                             Username = "User03"
                         });
-                });
-
-            modelBuilder.Entity("Strider.Infrastructure.Data.Model.Repost", b =>
-                {
-                    b.HasBaseType("Strider.Infrastructure.Data.Model.Post");
-
-                    b.Property<Guid?>("RepostedFromId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasIndex("RepostedFromId");
-
-                    b.HasDiscriminator().HasValue("Repost");
                 });
 
             modelBuilder.Entity("Strider.Infrastructure.Data.Model.Followers", b =>
@@ -168,23 +155,20 @@ namespace Strider.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Strider.Infrastructure.Data.Model.Post", b =>
                 {
+                    b.HasOne("Strider.Infrastructure.Data.Model.Post", "RepostedFrom")
+                        .WithMany()
+                        .HasForeignKey("RepostedFromId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("Strider.Infrastructure.Data.Model.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Strider.Infrastructure.Data.Model.Repost", b =>
-                {
-                    b.HasOne("Strider.Infrastructure.Data.Model.Post", "RepostedFrom")
-                        .WithMany()
-                        .HasForeignKey("RepostedFromId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.Navigation("RepostedFrom");
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

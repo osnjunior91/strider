@@ -7,7 +7,12 @@ namespace Strider.Domain.Queries.Post.Queries
     {
         public static Expression<Func<Infrastructure.Data.Model.Post, bool>> GetPostsDay(Guid userId)
         {
-            return x => x.UserId == userId && (x.CreatedAt > DateTime.Today.Date.AddMilliseconds(-1) && x.CreatedAt < DateTime.Today.Date.AddDays(1).AddMilliseconds(-1));
+            return x => x.UserId == userId && (x.CreatedAt >= DateTime.Today.Date && x.CreatedAt < DateTime.Today.Date.AddDays(1));
+        }
+
+        public static Expression<Func<Infrastructure.Data.Model.Post, bool>> GetAllPosts()
+        {
+            return x => x.IsDelete == false;
         }
     }
 }
