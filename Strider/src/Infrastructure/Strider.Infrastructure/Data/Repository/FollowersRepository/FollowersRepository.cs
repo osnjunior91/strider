@@ -18,15 +18,15 @@ namespace Strider.Infrastructure.Data.Repository.FollowersRepository
             _dataContext.SaveChangesAsync().Wait();
         }
 
-        public async Task DeleteAsync(Followers follower)
-        {
-            _dataset.Remove(follower);
-            await _dataContext.SaveChangesAsync();
-        }
-
         public async Task<Followers> FirstOrDefaultAsync(Expression<Func<Followers, bool>> filter)
         {
             return await _dataset.SingleOrDefaultAsync(filter);
+        }
+
+        public async Task UpdateAsync(Followers follower)
+        {
+            _dataset.Update(follower);
+            await _dataContext.SaveChangesAsync();
         }
     }
 }

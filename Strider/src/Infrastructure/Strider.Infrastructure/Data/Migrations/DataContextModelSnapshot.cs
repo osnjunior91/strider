@@ -28,6 +28,9 @@ namespace Strider.Infrastructure.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("DeleteAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid>("FollowerId")
                         .HasColumnType("uniqueidentifier");
 
@@ -55,11 +58,15 @@ namespace Strider.Infrastructure.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("DeleteAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
-
-                    b.Property<Guid?>("RepostedFromId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Text")
                         .HasColumnType("nvarchar(max)");
@@ -69,11 +76,11 @@ namespace Strider.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RepostedFromId");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("Posts");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Post");
                 });
 
             modelBuilder.Entity("Strider.Infrastructure.Data.Model.User", b =>
@@ -83,6 +90,9 @@ namespace Strider.Infrastructure.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeleteAt")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDelete")
@@ -101,28 +111,40 @@ namespace Strider.Infrastructure.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b662bee5-6986-45df-b4b9-36d0ec269fe7"),
-                            CreatedAt = new DateTime(2022, 4, 17, 8, 2, 47, 137, DateTimeKind.Local).AddTicks(6017),
+                            Id = new Guid("da3e5d4b-0284-4e6c-8ee8-7d1073f1ddad"),
+                            CreatedAt = new DateTime(2022, 4, 17, 10, 55, 29, 111, DateTimeKind.Local).AddTicks(2763),
                             IsDelete = false,
-                            Joined = new DateTime(2022, 4, 17, 8, 2, 47, 139, DateTimeKind.Local).AddTicks(7078),
+                            Joined = new DateTime(2022, 4, 17, 10, 55, 29, 112, DateTimeKind.Local).AddTicks(8943),
                             Username = "User01"
                         },
                         new
                         {
-                            Id = new Guid("d65d358d-d45a-48c4-ae2d-57d1657dc666"),
-                            CreatedAt = new DateTime(2022, 4, 17, 8, 2, 47, 139, DateTimeKind.Local).AddTicks(7687),
+                            Id = new Guid("28f93b4f-3942-4b6c-8ddd-1d8d68c3beb3"),
+                            CreatedAt = new DateTime(2022, 4, 17, 10, 55, 29, 112, DateTimeKind.Local).AddTicks(9418),
                             IsDelete = false,
-                            Joined = new DateTime(2022, 4, 17, 8, 2, 47, 139, DateTimeKind.Local).AddTicks(7695),
+                            Joined = new DateTime(2022, 4, 17, 10, 55, 29, 112, DateTimeKind.Local).AddTicks(9424),
                             Username = "User02"
                         },
                         new
                         {
-                            Id = new Guid("7dd2aff5-3fe2-4d80-9550-814cc58ee6c3"),
-                            CreatedAt = new DateTime(2022, 4, 17, 8, 2, 47, 139, DateTimeKind.Local).AddTicks(7699),
+                            Id = new Guid("ffb92f3c-b7f1-487d-b9eb-e17f5049f7d1"),
+                            CreatedAt = new DateTime(2022, 4, 17, 10, 55, 29, 112, DateTimeKind.Local).AddTicks(9427),
                             IsDelete = false,
-                            Joined = new DateTime(2022, 4, 17, 8, 2, 47, 139, DateTimeKind.Local).AddTicks(7700),
+                            Joined = new DateTime(2022, 4, 17, 10, 55, 29, 112, DateTimeKind.Local).AddTicks(9429),
                             Username = "User03"
                         });
+                });
+
+            modelBuilder.Entity("Strider.Infrastructure.Data.Model.Repost", b =>
+                {
+                    b.HasBaseType("Strider.Infrastructure.Data.Model.Post");
+
+                    b.Property<Guid?>("RepostedFromId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasIndex("RepostedFromId");
+
+                    b.HasDiscriminator().HasValue("Repost");
                 });
 
             modelBuilder.Entity("Strider.Infrastructure.Data.Model.Followers", b =>
@@ -146,20 +168,23 @@ namespace Strider.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Strider.Infrastructure.Data.Model.Post", b =>
                 {
-                    b.HasOne("Strider.Infrastructure.Data.Model.Post", "RepostedFrom")
-                        .WithMany()
-                        .HasForeignKey("RepostedFromId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("Strider.Infrastructure.Data.Model.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("RepostedFrom");
-
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Strider.Infrastructure.Data.Model.Repost", b =>
+                {
+                    b.HasOne("Strider.Infrastructure.Data.Model.Post", "RepostedFrom")
+                        .WithMany()
+                        .HasForeignKey("RepostedFromId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("RepostedFrom");
                 });
 #pragma warning restore 612, 618
         }

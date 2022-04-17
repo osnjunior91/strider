@@ -28,8 +28,7 @@ namespace Strider.Domain.Commands.Post.CommandHandlers
             if(postDays >= 5)
                 return new CommandResult(false, null, "Not allowed to post more today. Try again tomorrow.");
 
-            var post = new Infrastructure.Data.Model.Post(request.Text, request.UserId,
-                null, null, null);
+            var post = new Infrastructure.Data.Model.Post(request.Text, request.UserId, null);
             await _postRepository.CreatedAsync(post);
             return new CommandResult(true, post);
         }

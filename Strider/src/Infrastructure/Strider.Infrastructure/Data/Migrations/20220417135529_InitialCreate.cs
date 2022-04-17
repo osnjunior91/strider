@@ -15,6 +15,7 @@ namespace Strider.Infrastructure.Data.Migrations
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Joined = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeleteAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDelete = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -30,6 +31,7 @@ namespace Strider.Infrastructure.Data.Migrations
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FollowerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeleteAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDelete = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -56,8 +58,10 @@ namespace Strider.Infrastructure.Data.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RepostedFromId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeleteAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDelete = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -79,18 +83,18 @@ namespace Strider.Infrastructure.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "CreatedAt", "IsDelete", "Joined", "Username" },
-                values: new object[] { new Guid("b662bee5-6986-45df-b4b9-36d0ec269fe7"), new DateTime(2022, 4, 17, 8, 2, 47, 137, DateTimeKind.Local).AddTicks(6017), false, new DateTime(2022, 4, 17, 8, 2, 47, 139, DateTimeKind.Local).AddTicks(7078), "User01" });
+                columns: new[] { "Id", "CreatedAt", "DeleteAt", "IsDelete", "Joined", "Username" },
+                values: new object[] { new Guid("da3e5d4b-0284-4e6c-8ee8-7d1073f1ddad"), new DateTime(2022, 4, 17, 10, 55, 29, 111, DateTimeKind.Local).AddTicks(2763), null, false, new DateTime(2022, 4, 17, 10, 55, 29, 112, DateTimeKind.Local).AddTicks(8943), "User01" });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "CreatedAt", "IsDelete", "Joined", "Username" },
-                values: new object[] { new Guid("d65d358d-d45a-48c4-ae2d-57d1657dc666"), new DateTime(2022, 4, 17, 8, 2, 47, 139, DateTimeKind.Local).AddTicks(7687), false, new DateTime(2022, 4, 17, 8, 2, 47, 139, DateTimeKind.Local).AddTicks(7695), "User02" });
+                columns: new[] { "Id", "CreatedAt", "DeleteAt", "IsDelete", "Joined", "Username" },
+                values: new object[] { new Guid("28f93b4f-3942-4b6c-8ddd-1d8d68c3beb3"), new DateTime(2022, 4, 17, 10, 55, 29, 112, DateTimeKind.Local).AddTicks(9418), null, false, new DateTime(2022, 4, 17, 10, 55, 29, 112, DateTimeKind.Local).AddTicks(9424), "User02" });
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "Id", "CreatedAt", "IsDelete", "Joined", "Username" },
-                values: new object[] { new Guid("7dd2aff5-3fe2-4d80-9550-814cc58ee6c3"), new DateTime(2022, 4, 17, 8, 2, 47, 139, DateTimeKind.Local).AddTicks(7699), false, new DateTime(2022, 4, 17, 8, 2, 47, 139, DateTimeKind.Local).AddTicks(7700), "User03" });
+                columns: new[] { "Id", "CreatedAt", "DeleteAt", "IsDelete", "Joined", "Username" },
+                values: new object[] { new Guid("ffb92f3c-b7f1-487d-b9eb-e17f5049f7d1"), new DateTime(2022, 4, 17, 10, 55, 29, 112, DateTimeKind.Local).AddTicks(9427), null, false, new DateTime(2022, 4, 17, 10, 55, 29, 112, DateTimeKind.Local).AddTicks(9429), "User03" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Followers_FollowerId",

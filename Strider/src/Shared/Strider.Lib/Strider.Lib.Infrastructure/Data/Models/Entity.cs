@@ -12,10 +12,14 @@ namespace Strider.Lib.Strider.Lib.Infrastructure.Data.Models
 
         public Guid Id { get; private set; }
         public DateTime CreatedAt { get; private set; }
+        public DateTime? DeleteAt { get; private set; }
         public bool IsDelete { get; private set; }
 
-        public void DeleteEntity() => IsDelete = true;
-
+        public void DeleteEntity() 
+        {
+            IsDelete = true;
+            DeleteAt = DateTime.Now;
+        }
         public bool Equals(Entity other)
         {
             return Id == other.Id;

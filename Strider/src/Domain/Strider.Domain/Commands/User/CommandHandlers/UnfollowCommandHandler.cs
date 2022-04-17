@@ -32,8 +32,8 @@ namespace Strider.Domain.Commands.User.CommandHandlers
                 return new CommandResult(false, null, "Not Found");
 
             follow.DeleteEntity();
-
-            //TODO Mudar delete para nao perder dados await _followersRepository.DeleteAsync(follow);
+            
+            await _followersRepository.UpdateAsync(follow);
             return new CommandResult(true, null, "Delete success");
         }
     }

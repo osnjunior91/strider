@@ -10,6 +10,6 @@ namespace Strider.Infrastructure.Data.Repository.FollowersRepository
     {
         Task CreateAsync(Followers follower);
         Task<Followers> FirstOrDefaultAsync(Expression<Func<Followers, bool>> filter);
-        Task DeleteAsync(Followers follower);
+        Task UpdateAsync(Followers follower);
     }
 }

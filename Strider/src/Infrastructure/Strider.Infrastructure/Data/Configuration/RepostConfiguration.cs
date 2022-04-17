@@ -4,12 +4,13 @@ using Strider.Infrastructure.Data.Model;
 
 namespace Strider.Infrastructure.Data.Configuration
 {
-    public class PostConfiguration : IEntityTypeConfiguration<Post>
+    public class RepostConfiguration : IEntityTypeConfiguration<Repost>
     {
-        public void Configure(EntityTypeBuilder<Post> builder)
+        public void Configure(EntityTypeBuilder<Repost> builder)
         {
             builder.ToTable("posts").HasKey(x => x.Id);
             builder.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId);
+            builder.HasOne(x => x.RepostedFrom).WithMany().HasForeignKey(x => x.RepostedFromId);
         }
     }
 }
