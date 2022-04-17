@@ -32,9 +32,9 @@ namespace Strider.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] string text)
         {
-            return ReturnQueryApi(await _mediator.Send(new GetAllPostsQuery()));
+            return ReturnQueryApi(await _mediator.Send(new GetAllPostsQuery(text)));
         }
     }
 }

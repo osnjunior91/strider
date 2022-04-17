@@ -12,6 +12,12 @@ namespace Strider.Infrastructure.Data.Repository.FollowersRepository
         private readonly DataContext _dataContext;
         private readonly DbSet<Followers> _dataset;
 
+        public FollowersRepository(DataContext dataContext)
+        {
+            _dataContext = dataContext;
+            _dataset = dataContext.Set<Followers>();
+        }
+
         public async Task CreateAsync(Followers follower)
         {
             await _dataset.AddAsync(follower);

@@ -16,7 +16,7 @@ namespace Strider.Domain.Queries.Post.QueryHandlers
         }
         public async Task<QueryResult> Handle(GetAllPostsQuery request, CancellationToken cancellationToken)
         {
-            var response = await _postRepository.WhereAsync(PostQueries.GetAllPosts());
+            var response = await _postRepository.WhereAsync(PostQueries.GetAllPostsByText(request.Text));
             return new QueryResult(true, response);
         }
     }
