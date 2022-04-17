@@ -9,7 +9,10 @@ namespace Strider.Domain.Commands.Post.Validators
         public PostCommandValidators()
         {
             RuleFor(x => x.UserId).NotEmpty().NotNull();
-            RuleFor(x => x.Text).NotEmpty().NotNull();
+            RuleFor(x => x.Text)
+                .NotEmpty().WithMessage("Post Text is required")
+                .NotNull().WithMessage("Post Text is required")
+                .MaximumLength(777).WithMessage("Posts can have a maximum of 777 characters.");
         }
     }
 }

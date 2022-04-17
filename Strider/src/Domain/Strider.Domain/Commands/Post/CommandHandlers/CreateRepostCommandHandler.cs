@@ -19,8 +19,9 @@ namespace Strider.Domain.Commands.Post.CommandHandlers
         }
         public async Task<CommandResult> Handle(CreateRepostCommand request, CancellationToken cancellationToken)
         {
-            var validator = new CreateRepostCommandValidators();
-            validator.ValidateAndThrow(request);
+            var validResult = new CreateRepostCommandValidators().Validate(request);
+            if (!validResult.IsValid)
+                return new CommandResult(false, null, validResult.ToString());
             var post = new Infrastructure.Data.Model.Post(request.Text, DateTime.Now, request.UserId,
                 null, request.RepostedFromId, null);
             await _postRepository.CreatedAsync(post);
