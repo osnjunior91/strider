@@ -13,7 +13,6 @@ namespace Strider.Infrastructure.Data.Context
         public DbSet<User> Users { get; set; }
         public DbSet<Followers> Followers { get; set; }
         public DbSet<Post> Posts { get; set; }
-        public DbSet<Repost> Reposts { get; set; }
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
