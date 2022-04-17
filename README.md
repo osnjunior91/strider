@@ -1,2 +1,2 @@
-# strider-
-Strider  Test
+# strider-api
+strider
