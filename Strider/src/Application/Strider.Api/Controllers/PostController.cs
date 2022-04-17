@@ -1,17 +1,14 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Nivello.Lib.Nivello.Application;
 using Strider.Domain.Commands.Post.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Strider.Api.Controllers
 {
     [Route("api/v1/post")]
     [ApiController]
-    public class PostController : ControllerBase
+    public class PostController : ControllerBaseAPI 
     {
         public IMediator _mediator;
 
@@ -23,15 +20,14 @@ namespace Strider.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreatePostCommand command)
         {
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            return ReturnCommandApi(await _mediator.Send(command));
         }
+
         [HttpPost]
         [Route("repost")]
         public async Task<IActionResult> RePost([FromBody] CreateRepostCommand command)
         {
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            return ReturnCommandApi(await _mediator.Send(command));
         }
     }
 }

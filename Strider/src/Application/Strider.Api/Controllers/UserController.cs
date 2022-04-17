@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Nivello.Lib.Nivello.Application;
 using Strider.Domain.Commands.User.Commands;
 using Strider.Domain.Queries.Users.Queries;
 using System;
@@ -9,7 +10,7 @@ namespace Strider.Api.Controllers
 {
     [Route("api/v1/user")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UserController : ControllerBaseAPI
     {
         public IMediator _mediator;
 
@@ -22,24 +23,21 @@ namespace Strider.Api.Controllers
         [Route("follow")]
         public async Task<IActionResult> FollowAsync([FromBody] FollowCommand command)
         {
-            var result = await _mediator.Send(command);
-            return Ok(result);
+             return ReturnCommandApi(await _mediator.Send(command));
         }
 
         [HttpPost]
         [Route("unfollow")]
         public async Task<IActionResult> UnFollowAsync([FromBody] UnfollowCommand command)
         {
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            return ReturnCommandApi(await _mediator.Send(command));
         }
 
         [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
-            var result = await _mediator.Send(new GetUserByIdQuery(id));
-            return Ok(result);
+            return ReturnQueryApi(await _mediator.Send(new GetUserByIdQuery(id)));
         }
     }
 }

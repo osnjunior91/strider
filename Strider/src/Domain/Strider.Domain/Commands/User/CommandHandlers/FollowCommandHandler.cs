@@ -1,8 +1,10 @@
 ﻿using FluentValidation;
 using Strider.Domain.Commands.User.Commands;
 using Strider.Domain.Commands.User.Validators;
+using Strider.Domain.Queries.Users.Queries;
 using Strider.Infrastructure.Data.Model;
 using Strider.Infrastructure.Data.Repository.FollowersRepository;
+using Strider.Infrastructure.Data.Repository.UserRepository;
 using Strider.Lib.Strider.Lib.Domain.Commands;
 using Strider.Lib.Strider.Lib.Domain.Commands.Interface;
 using System;
@@ -14,16 +16,24 @@ namespace Strider.Domain.Commands.User.CommandHandlers
     public class FollowCommandHandler : ICommandHandler<FollowCommand>
     {
         private readonly IFollowersRepository _followersRepository;
-        public FollowCommandHandler(IFollowersRepository followersRepository)
+        private readonly IUserRepository _userRepository;
+        public FollowCommandHandler(IFollowersRepository followersRepository, IUserRepository userRepository)
         {
             _followersRepository = followersRepository;
+            _userRepository = userRepository;
         }
         public async Task<CommandResult> Handle(FollowCommand request, CancellationToken cancellationToken)
         {
             var validator = new FollowCommandValidator();
             validator.ValidateAndThrow(request);
+
             if (request.UserId == request.UserFollowId)
                 throw new ArgumentException("You cannot follow yourself.");
+            var userFollow = await _userRepository.FirstOrDefaultAsync(UserQueries.GetById(request.UserFollowId));
+
+            if (request.UserId == request.UserFollowId)
+                throw new ArgumentException("You cannot follow yourself.");
+
             var follow = new Followers(request.UserId, request.UserFollowId);
             await _followersRepository.CreateAsync(follow);
             return new CommandResult(true, follow);
