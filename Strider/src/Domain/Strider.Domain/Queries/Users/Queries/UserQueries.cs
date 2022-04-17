@@ -8,7 +8,7 @@ namespace Strider.Domain.Queries.Users.Queries
     {
         public static Expression<Func<User, bool>> GetById(Guid id)
         {
-            return x => x.Id == id;
+            return x => x.Id == id && x.IsDelete == false;
         }
     }
 }

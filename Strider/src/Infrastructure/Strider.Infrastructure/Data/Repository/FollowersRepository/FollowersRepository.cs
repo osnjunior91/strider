@@ -18,6 +18,11 @@ namespace Strider.Infrastructure.Data.Repository.FollowersRepository
             _dataset = dataContext.Set<Followers>();
         }
 
+        public async Task<int> CountAsync(Expression<Func<Followers, bool>> filter)
+        {
+            return await _dataset.CountAsync(filter);
+        }
+
         public async Task CreateAsync(Followers follower)
         {
             await _dataset.AddAsync(follower);

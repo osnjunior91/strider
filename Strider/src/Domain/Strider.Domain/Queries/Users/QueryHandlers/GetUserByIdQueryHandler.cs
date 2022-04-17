@@ -1,6 +1,8 @@
-﻿using Strider.Domain.Queries.Post.Queries;
+﻿using Strider.Domain.Queries.Followers.Queries;
+using Strider.Domain.Queries.Post.Queries;
 using Strider.Domain.Queries.Users.Queries;
 using Strider.Domain.Queries.Users.ViewModels;
+using Strider.Infrastructure.Data.Repository.FollowersRepository;
 using Strider.Infrastructure.Data.Repository.PostRepository;
 using Strider.Infrastructure.Data.Repository.UserRepository;
 using Strider.Lib.Strider.Lib.Domain.Queries;
@@ -14,10 +16,13 @@ namespace Strider.Domain.Queries.Users.QueryHandlers
     {
         private readonly IUserRepository _userRepository;
         private readonly IPostRepository _postRepository;
-        public GetUserByIdQueryHandler(IUserRepository userRepository, IPostRepository postRepository)
+        private readonly IFollowersRepository _followersRepository;
+        public GetUserByIdQueryHandler(IUserRepository userRepository, IPostRepository postRepository, 
+            IFollowersRepository followersRepository)
         {
             _userRepository = userRepository;
             _postRepository = postRepository;
+            _followersRepository = followersRepository;
         }
         public async Task<QueryResult> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
         {
@@ -25,7 +30,9 @@ namespace Strider.Domain.Queries.Users.QueryHandlers
             if (user == null)
                 return new QueryResult(false, null, "User not found");
             var postsToday = await _postRepository.CountAsync(PostQueries.GetPostsDay(request.Id));
-            return new QueryResult(true, new UserViewModel(user.Username, user.Joined, 0, 0, postsToday));
+            var followers = await _followersRepository.CountAsync(FollowersQueries.GetFollower(request.Id));
+            var following = await _followersRepository.CountAsync(FollowersQueries.GetFollowing(request.Id));
+            return new QueryResult(true, new UserViewModel(user.Username, user.Joined, followers, following, postsToday));
         }
     }
 }
