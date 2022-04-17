@@ -8,8 +8,8 @@ namespace Strider.Domain.Commands.User.Validators
     {
         public FollowBaseCommandValidator()
         {
-            RuleFor(x => x.UserId).NotEmpty().NotNull();
-            RuleFor(x => x.UserFollowId).NotEmpty().NotNull();
+            RuleFor(x => x.UserId).Must(ValidGuidEmpty).WithMessage("Invalid UserId");
+            RuleFor(x => x.UserFollowId).Must(ValidGuidEmpty).WithMessage("Invalid UserFollowId");
         }
     }
 }

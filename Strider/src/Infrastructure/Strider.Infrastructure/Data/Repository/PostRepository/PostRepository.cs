@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Strider.Infrastructure.Data.Context;
 using Strider.Infrastructure.Data.Model;
+using System;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Strider.Infrastructure.Data.Repository.PostRepository
@@ -14,6 +16,11 @@ namespace Strider.Infrastructure.Data.Repository.PostRepository
         {
             _dataContext = dataContext;
             _dataset = dataContext.Set<Post>();
+        }
+
+        public async Task<int> CountAsync(Expression<Func<Post, bool>> filter)
+        {
+            return await _dataset.CountAsync(filter);
         }
 
         public async Task CreatedAsync(Post post)

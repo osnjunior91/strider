@@ -8,7 +8,7 @@ namespace Strider.Domain.Commands.Post.Validators
     {
         public PostCommandValidators()
         {
-            RuleFor(x => x.UserId).NotEmpty().NotNull();
+            RuleFor(x => x.UserId).Must(ValidGuidEmpty).WithMessage("Invalid UserId");
             RuleFor(x => x.Text)
                 .NotEmpty().WithMessage("Post Text is required")
                 .NotNull().WithMessage("Post Text is required")

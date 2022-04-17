@@ -24,15 +24,17 @@ namespace Strider.Domain.Commands.User.CommandHandlers
         }
         public async Task<CommandResult> Handle(FollowCommand request, CancellationToken cancellationToken)
         {
-            var validator = new FollowCommandValidator();
-            validator.ValidateAndThrow(request);
+
+            var validResult = new FollowCommandValidator().Validate(request);
+            if (!validResult.IsValid)
+                return new CommandResult(false, null, validResult.ToString());
 
             if (request.UserId == request.UserFollowId)
-                throw new ArgumentException("You cannot follow yourself.");
+                return new CommandResult(false, null, "You cannot follow yourself.");
+            
             var userFollow = await _userRepository.FirstOrDefaultAsync(UserQueries.GetById(request.UserFollowId));
-
-            if (request.UserId == request.UserFollowId)
-                throw new ArgumentException("You cannot follow yourself.");
+            if (userFollow == null)
+                return new CommandResult(false, null, "Invalid UserFollowId.");
 
             var follow = new Followers(request.UserId, request.UserFollowId);
             await _followersRepository.CreateAsync(follow);

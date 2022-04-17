@@ -23,11 +23,16 @@ namespace Strider.Domain.Commands.User.CommandHandlers
         }
         public async Task<CommandResult> Handle(UnfollowCommand request, CancellationToken cancellationToken)
         {
-            var validator = new UnfollowCommandValidator();
-            validator.ValidateAndThrow(request);
+            var validResult = new UnfollowCommandValidator().Validate(request);
+            if (!validResult.IsValid)
+                return new CommandResult(false, null, validResult.ToString());
+
             var follow = await _followersRepository.FirstOrDefaultAsync(FollowersQueries.ExistsFollower(request.UserId, request.UserFollowId));
             if (follow == null)
                 return new CommandResult(false, null, "Not Found");
+
+            follow.DeleteEntity();
+
             //TODO Mudar delete para nao perder dados await _followersRepository.DeleteAsync(follow);
             return new CommandResult(true, null, "Delete success");
         }

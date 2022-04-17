@@ -7,7 +7,7 @@ namespace Strider.Domain.Commands.Post.Validators
     {
         public CreateRepostCommandValidators() : base()
         {
-            RuleFor(x => x.RepostedFromId).NotEmpty().NotNull();
+            RuleFor(x => x.RepostedFromId).Must(ValidGuidEmpty).WithMessage("Invalid RepostedFromId");
         }
     }
 }

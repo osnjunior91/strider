@@ -52,9 +52,6 @@ namespace Strider.Infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -104,26 +101,26 @@ namespace Strider.Infrastructure.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b07b6ac9-2ddc-4c75-8e80-b05bd2fb6a80"),
-                            CreatedAt = new DateTime(2022, 4, 17, 6, 17, 22, 942, DateTimeKind.Local).AddTicks(3931),
+                            Id = new Guid("b662bee5-6986-45df-b4b9-36d0ec269fe7"),
+                            CreatedAt = new DateTime(2022, 4, 17, 8, 2, 47, 137, DateTimeKind.Local).AddTicks(6017),
                             IsDelete = false,
-                            Joined = new DateTime(2022, 4, 17, 6, 17, 22, 943, DateTimeKind.Local).AddTicks(4866),
+                            Joined = new DateTime(2022, 4, 17, 8, 2, 47, 139, DateTimeKind.Local).AddTicks(7078),
                             Username = "User01"
                         },
                         new
                         {
-                            Id = new Guid("d9f75b0f-0f51-4a91-943f-09ae73652d12"),
-                            CreatedAt = new DateTime(2022, 4, 17, 6, 17, 22, 943, DateTimeKind.Local).AddTicks(5223),
+                            Id = new Guid("d65d358d-d45a-48c4-ae2d-57d1657dc666"),
+                            CreatedAt = new DateTime(2022, 4, 17, 8, 2, 47, 139, DateTimeKind.Local).AddTicks(7687),
                             IsDelete = false,
-                            Joined = new DateTime(2022, 4, 17, 6, 17, 22, 943, DateTimeKind.Local).AddTicks(5228),
+                            Joined = new DateTime(2022, 4, 17, 8, 2, 47, 139, DateTimeKind.Local).AddTicks(7695),
                             Username = "User02"
                         },
                         new
                         {
-                            Id = new Guid("a15c5a11-fab6-4ee9-9744-da54ffbba68d"),
-                            CreatedAt = new DateTime(2022, 4, 17, 6, 17, 22, 943, DateTimeKind.Local).AddTicks(5231),
+                            Id = new Guid("7dd2aff5-3fe2-4d80-9550-814cc58ee6c3"),
+                            CreatedAt = new DateTime(2022, 4, 17, 8, 2, 47, 139, DateTimeKind.Local).AddTicks(7699),
                             IsDelete = false,
-                            Joined = new DateTime(2022, 4, 17, 6, 17, 22, 943, DateTimeKind.Local).AddTicks(5232),
+                            Joined = new DateTime(2022, 4, 17, 8, 2, 47, 139, DateTimeKind.Local).AddTicks(7700),
                             Username = "User03"
                         });
                 });
