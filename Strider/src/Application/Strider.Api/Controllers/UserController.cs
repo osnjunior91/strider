@@ -39,5 +39,12 @@ namespace Strider.Api.Controllers
         [Route("myposts/{id}")]
         public async Task<IActionResult> GetPostsByIdAsync(Guid id, [FromQuery] int page)
             => ReturnQueryApi(await _mediator.Send(new GetUserLastPostsQuery(id, page, 5)));
+
+
+        [HttpGet]
+        [Route("{userId}/follower/{followerId}")]
+        public async Task<IActionResult> GetPostsByIdAsync(Guid userId, Guid followerId)
+            => ReturnQueryApi(await _mediator.Send(new VerifyExistFollowerQuery(userId, followerId)));
+
     }
 }

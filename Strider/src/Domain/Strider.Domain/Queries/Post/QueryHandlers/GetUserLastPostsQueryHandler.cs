@@ -15,6 +15,11 @@ namespace Strider.Domain.Queries.Post.QueryHandlers
     {
         private readonly IPostRepository _postRepository;
 
+        public GetUserLastPostsQueryHandler(IPostRepository postRepository)
+        {
+            _postRepository = postRepository;
+        }
+
         public async Task<QueryResult> Handle(GetUserLastPostsQuery request, CancellationToken cancellationToken)
         {
             var response = await _postRepository.WhereAsync(PostQueries.GetUserLastPost(request.UserId), request.Page, request.PageSize);
