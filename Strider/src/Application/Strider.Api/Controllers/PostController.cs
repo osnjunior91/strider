@@ -10,7 +10,7 @@ namespace Strider.Api.Controllers
 {
     [Route("api/v1/post")]
     [ApiController]
-    public class PostController : ControllerBaseAPI 
+    public class PostController : ControllerBaseAPI
     {
         public IMediator _mediator;
 
@@ -20,28 +20,17 @@ namespace Strider.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CreatePostCommand command)
-        {
-            return ReturnCommandApi(await _mediator.Send(command));
-        }
-
+        public async Task<IActionResult> Post([FromBody] CreatePostCommand command) => ReturnCommandApi(await _mediator.Send(command));
+        
         [HttpPost]
         [Route("repost")]
-        public async Task<IActionResult> RePost([FromBody] CreateRepostCommand command)
-        {
-            return ReturnCommandApi(await _mediator.Send(command));
-        }
+        public async Task<IActionResult> RePost([FromBody] CreateRepostCommand command) => ReturnCommandApi(await _mediator.Send(command));
 
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] string text)
-        {
-            return ReturnQueryApi(await _mediator.Send(new GetAllPostsQuery(text)));
-        }
+        public async Task<IActionResult> GetAll([FromQuery] string text) => ReturnQueryApi(await _mediator.Send(new GetAllPostsQuery(text)));
+        
         [HttpGet]
         [Route("following/{userId}")]
-        public async Task<IActionResult> GetAll(Guid userId, [FromQuery] string text)
-        {
-            return ReturnQueryApi(await _mediator.Send(new GetAllPostsOnlyFollowingQuery(userId, text)));
-        }
+        public async Task<IActionResult> GetAll(Guid userId, [FromQuery] string text) => ReturnQueryApi(await _mediator.Send(new GetAllPostsOnlyFollowingQuery(userId, text)));
     }
 }

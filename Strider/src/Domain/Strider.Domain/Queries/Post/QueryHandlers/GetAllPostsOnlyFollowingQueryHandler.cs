@@ -21,6 +21,9 @@ namespace Strider.Domain.Queries.Post.QueryHandlers
         public async Task<QueryResult> Handle(GetAllPostsOnlyFollowingQuery request, CancellationToken cancellationToken)
         {
             var following = await _followersRepository.WhereAsync(FollowersQueries.GetFollowing(request.UserId));
+            if(following.Count == 0)
+                return new QueryResult(true, new object[0]);
+
             var response = await _postRepository.WhereAsync(PostQueries.GetAllPostsOnlyFollowing(request.Text, following));
             return new QueryResult(true, response);
         }
