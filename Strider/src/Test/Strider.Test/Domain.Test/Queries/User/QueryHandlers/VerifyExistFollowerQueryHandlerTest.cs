@@ -25,7 +25,7 @@ namespace Strider.Test.Domain.Test.Queries.User.QueryHandlers
 
         [TestCase(0, false)]
         [TestCase(1, true)]
-        public async Task When_Handle_NotFound_Follow(int follows, bool expectReturn)
+        public async Task Handle_Follow(int follows, bool expectReturn)
         {
             _followersRepository.Setup(m => m.CountAsync(It.IsAny<Expression<Func<Infrastructure.Data.Model.Followers, bool>>>())).ReturnsAsync(follows);
             var handle = new VerifyExistFollowerQueryHandler(_followersRepository.Object);

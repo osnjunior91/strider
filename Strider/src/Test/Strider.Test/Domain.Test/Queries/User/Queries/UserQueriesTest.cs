@@ -1,11 +1,8 @@
-﻿using Bogus;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Strider.Domain.Queries.Users.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Strider.Test.Domain.Test.Queries.User.Queries
 {
