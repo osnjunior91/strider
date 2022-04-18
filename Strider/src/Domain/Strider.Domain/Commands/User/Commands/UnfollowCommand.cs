@@ -8,6 +8,10 @@ namespace Strider.Domain.Commands.User.Commands
 {
     public class UnfollowCommand : FollowCommand
     {
+        public UnfollowCommand()
+        {
+        }
+
         public UnfollowCommand(Guid userId, Guid userFollowId) : base(userId, userFollowId)
         {
         }
