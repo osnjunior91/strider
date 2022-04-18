@@ -18,7 +18,7 @@ namespace Strider.Domain.Queries.Post.Queries
                ? x => x.Text.ToLower().Contains(text.ToLower()) && x.IsDelete == false
                : x => x.IsDelete == false;
         }
-        public static Expression<Func<Infrastructure.Data.Model.Post, bool>> GetAllPostsByTextonlyFollowing(string text, List<Infrastructure.Data.Model.Followers> users)
+        public static Expression<Func<Infrastructure.Data.Model.Post, bool>> GetAllPostsOnlyFollowing(string text, List<Infrastructure.Data.Model.Followers> users)
         {
             return (text?.Length > 0)
                ? x => users.Any(us => us.FollowerId == x.UserId) && x.Text.ToLower().Contains(text.ToLower()) && x.IsDelete == false 

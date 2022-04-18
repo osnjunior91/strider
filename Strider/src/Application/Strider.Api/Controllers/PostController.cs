@@ -41,7 +41,7 @@ namespace Strider.Api.Controllers
         [Route("following/{userId}")]
         public async Task<IActionResult> GetAll(Guid userId, [FromQuery] string text)
         {
-            return ReturnQueryApi(await _mediator.Send(new GetAllPostsQuery(text)));
+            return ReturnQueryApi(await _mediator.Send(new GetAllPostsOnlyFollowingQuery(userId, text)));
         }
     }
 }
