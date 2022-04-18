@@ -2,7 +2,7 @@
 using Strider.Infrastructure.Data.Repository.PostRepository;
 using Strider.Lib.Strider.Lib.Domain.Queries;
 using Strider.Lib.Strider.Lib.Domain.Queries.Interfaces;
-using System.Threading;
+using System.Threading; 
 using System.Threading.Tasks;
 
 namespace Strider.Domain.Queries.Post.QueryHandlers
@@ -16,7 +16,7 @@ namespace Strider.Domain.Queries.Post.QueryHandlers
         }
         public async Task<QueryResult> Handle(GetAllPostsQuery request, CancellationToken cancellationToken)
         {
-            var response = await _postRepository.WhereAsync(PostQueries.GetAllPostsByText(request.Text));
+            var response = await _postRepository.WhereAsync(PostQueries.GetAllPostsByText(request.Text), request.Page, request.PageSize);
             return new QueryResult(true, response);
         }
     }

@@ -13,6 +13,6 @@ namespace Strider.Infrastructure.Data.Repository.PostRepository
         Task CreatedAsync(Post post);
         Task<int> CountAsync(Expression<Func<Post, bool>> filter);
         Task<Post> FirstOrDefaultAsync(Expression<Func<Post, bool>> filter);
-        Task<List<Post>> WhereAsync(Expression<Func<Post, bool>> filter);
+        Task<List<Post>> WhereAsync(Expression<Func<Post, bool>> filter, int skip, int take);
     }
 }

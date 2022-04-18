@@ -29,12 +29,12 @@ namespace Strider.Api.Controllers
             => ReturnCommandApi(await _mediator.Send(command));
 
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] string text) 
-            => ReturnQueryApi(await _mediator.Send(new GetAllPostsQuery(text)));
+        public async Task<IActionResult> GetAll([FromQuery] string text, [FromQuery] int page) 
+            => ReturnQueryApi(await _mediator.Send(new GetAllPostsQuery(text, page, 10)));
         
         [HttpGet]
         [Route("following/{userId}")]
-        public async Task<IActionResult> GetAll(Guid userId, [FromQuery] string text) 
-            => ReturnQueryApi(await _mediator.Send(new GetAllPostsOnlyFollowingQuery(userId, text)));
+        public async Task<IActionResult> GetAll(Guid userId, [FromQuery] string text, [FromQuery] int page) 
+            => ReturnQueryApi(await _mediator.Send(new GetAllPostsOnlyFollowingQuery(userId, text, page, 10)));
     }
 }

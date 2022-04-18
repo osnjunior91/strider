@@ -4,7 +4,7 @@ namespace Strider.Domain.Queries.Post.Queries
 {
     public class GetAllPostsOnlyFollowingQuery : GetAllPostsQuery
     {
-        public GetAllPostsOnlyFollowingQuery(Guid userId, string text) : base(text)
+        public GetAllPostsOnlyFollowingQuery(Guid userId, string text, int page, int pageSize) : base(text, page, pageSize)
         {
             UserId = userId;
         }

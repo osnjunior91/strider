@@ -24,7 +24,9 @@ namespace Strider.Domain.Queries.Post.QueryHandlers
             if(following.Count == 0)
                 return new QueryResult(true, new object[0]);
 
-            var response = await _postRepository.WhereAsync(PostQueries.GetAllPostsOnlyFollowing(request.Text, following));
+            var response = await _postRepository.WhereAsync(
+                PostQueries.GetAllPostsOnlyFollowing(request.Text, following), 
+                request.Page, request.PageSize);
             return new QueryResult(true, response);
         }
     }
