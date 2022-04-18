@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="LinqKit" Version="1.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\Strider.Infrastructure\Strider.Infrastructure.csproj" />
   </ItemGroup>
 

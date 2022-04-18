@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LinqKit;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -20,9 +21,23 @@ namespace Strider.Domain.Queries.Post.Queries
         }
         public static Expression<Func<Infrastructure.Data.Model.Post, bool>> GetAllPostsOnlyFollowing(string text, List<Infrastructure.Data.Model.Followers> users)
         {
-            return (text?.Length > 0)
-               ? x => users.Any(us => us.FollowerId == x.UserId) && x.Text.ToLower().Contains(text.ToLower()) && x.IsDelete == false 
-               : x => users.Any(us => us.FollowerId == x.UserId) && x.IsDelete == false;
+
+            var filter = PredicateBuilder.New<Infrastructure.Data.Model.Post>(true);
+            var filterFollowing = PredicateBuilder.New<Infrastructure.Data.Model.Post>(true);
+
+            if (text?.Length > 0)
+                filter = filter.Start(x => (x.Text.ToLower().Contains(text.ToLower()) && x.IsDelete == false));
+            else
+                filter.Start(x => (x.IsDelete == false));
+
+            foreach (var item in users)
+            {
+                filterFollowing = filterFollowing.Or(x => x.UserId == item.FollowerId);
+            }
+
+            filter = filter.And(filterFollowing);
+
+            return filterFollowing;
         }
     }
 }
