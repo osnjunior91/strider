@@ -45,7 +45,7 @@ namespace Strider.Domain.Queries.Post.Queries
                 filterFollowing = filterFollowing.Or(x => x.UserId == item.FollowerId);
             }
 
-            filter = filter.And(filterFollowing);
+            filterFollowing = filterFollowing.And(filter);
             return filterFollowing;
         }
     }
