@@ -39,7 +39,7 @@ namespace Strider.Infrastructure.Data.Repository.PostRepository
             .AsQueryable()
             .Where(filter)
             .OrderByDescending(x => x.CreatedAt)
-            .Skip(page)
+            .Skip((page - 1 ) * pageSize)
             .Take(pageSize)
             .ToListAsync();
     }

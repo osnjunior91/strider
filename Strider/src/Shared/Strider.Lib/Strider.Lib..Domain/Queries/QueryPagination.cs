@@ -4,7 +4,7 @@
     {
         protected QueryPagination(int page, int pageSize)
         {
-            Page = page;
+            Page = (page == 0) ? 1 : page;
             PageSize = pageSize;
         }
 
