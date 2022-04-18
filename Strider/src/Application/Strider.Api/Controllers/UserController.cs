@@ -21,14 +21,17 @@ namespace Strider.Api.Controllers
 
         [HttpPost]
         [Route("follow")]
-        public async Task<IActionResult> FollowAsync([FromBody] FollowCommand command) => ReturnCommandApi(await _mediator.Send(command));
+        public async Task<IActionResult> FollowAsync([FromBody] FollowCommand command) 
+            => ReturnCommandApi(await _mediator.Send(command));
 
         [HttpPost]
         [Route("unfollow")]
-        public async Task<IActionResult> UnFollowAsync([FromBody] UnfollowCommand command) => ReturnCommandApi(await _mediator.Send(command));
+        public async Task<IActionResult> UnFollowAsync([FromBody] UnfollowCommand command) 
+            => ReturnCommandApi(await _mediator.Send(command));
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> GetByIdAsync(Guid id) => ReturnQueryApi(await _mediator.Send(new GetUserByIdQuery(id)));
+        public async Task<IActionResult> GetByIdAsync(Guid id) 
+            => ReturnQueryApi(await _mediator.Send(new GetUserByIdQuery(id)));
     }
 }

@@ -20,7 +20,8 @@ namespace Strider.Infrastructure.Data.Repository.FollowersRepository
             _dataset = dataContext.Set<Followers>();
         }
 
-        public async Task<int> CountAsync(Expression<Func<Followers, bool>> filter) => await _dataset.CountAsync(filter);
+        public async Task<int> CountAsync(Expression<Func<Followers, bool>> filter) 
+            => await _dataset.CountAsync(filter);
 
         public async Task CreateAsync(Followers follower)
         {
@@ -28,7 +29,8 @@ namespace Strider.Infrastructure.Data.Repository.FollowersRepository
             _dataContext.SaveChangesAsync().Wait();
         }
 
-        public async Task<Followers> FirstOrDefaultAsync(Expression<Func<Followers, bool>> filter) => await _dataset.SingleOrDefaultAsync(filter);
+        public async Task<Followers> FirstOrDefaultAsync(Expression<Func<Followers, bool>> filter) 
+            => await _dataset.SingleOrDefaultAsync(filter);
 
         public async Task UpdateAsync(Followers follower)
         {
@@ -36,6 +38,7 @@ namespace Strider.Infrastructure.Data.Repository.FollowersRepository
             await _dataContext.SaveChangesAsync();
         }
 
-        public async Task<List<Followers>> WhereAsync(Expression<Func<Followers, bool>> filter) => await _dataset.AsQueryable().Where(filter).ToListAsync();
+        public async Task<List<Followers>> WhereAsync(Expression<Func<Followers, bool>> filter) 
+            => await _dataset.AsQueryable().Where(filter).ToListAsync();
     }
 }

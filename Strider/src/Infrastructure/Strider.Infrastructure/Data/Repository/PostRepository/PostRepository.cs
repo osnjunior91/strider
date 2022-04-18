@@ -31,8 +31,10 @@ namespace Strider.Infrastructure.Data.Repository.PostRepository
             _dataContext.SaveChangesAsync().Wait();
         }
 
-        public async Task<Post> FirstOrDefaultAsync(Expression<Func<Post, bool>> filter) => await _dataset.SingleOrDefaultAsync(filter);
+        public async Task<Post> FirstOrDefaultAsync(Expression<Func<Post, bool>> filter) 
+            => await _dataset.SingleOrDefaultAsync(filter);
 
-        public async Task<List<Post>> WhereAsync(Expression<Func<Post, bool>> filter) => await _dataset.AsQueryable().Where(filter).OrderByDescending(x => x.CreatedAt).ToListAsync();
+        public async Task<List<Post>> WhereAsync(Expression<Func<Post, bool>> filter) 
+            => await _dataset.AsQueryable().Where(filter).OrderByDescending(x => x.CreatedAt).ToListAsync();
     }
 }

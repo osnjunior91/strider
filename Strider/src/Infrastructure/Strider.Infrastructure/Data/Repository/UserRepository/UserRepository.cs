@@ -20,6 +20,7 @@ namespace Strider.Infrastructure.Data.Repository.UserRepository
             _dataContext = dataContext;
             _dataset = _dataContext.Set<User>();
         }
-        public async Task<User> FirstOrDefaultAsync(Expression<Func<User, bool>> filter) => await _dataset.SingleOrDefaultAsync(filter);
+        public async Task<User> FirstOrDefaultAsync(Expression<Func<User, bool>> filter) 
+            => await _dataset.SingleOrDefaultAsync(filter);
     }
 }
