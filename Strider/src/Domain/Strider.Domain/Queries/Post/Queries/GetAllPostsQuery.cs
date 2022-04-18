@@ -2,17 +2,13 @@
 
 namespace Strider.Domain.Queries.Post.Queries
 {
-    public class GetAllPostsQuery : Query
+    public class GetAllPostsQuery : QueryPagination
     {
-        public GetAllPostsQuery(string text, int page, int pageSize)
+        public GetAllPostsQuery(string text, int page, int pageSize) : base(page, pageSize)
         {
             Text = text;
-            Page = page;
-            PageSize = pageSize;
         }
 
         public string Text { get; private set; }
-        public int Page { get; private set; }
-        public int PageSize { get; private set; }
     }
 }

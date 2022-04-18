@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Nivello.Lib.Nivello.Application;
 using Strider.Domain.Commands.User.Commands;
+using Strider.Domain.Queries.Post.Queries;
 using Strider.Domain.Queries.Users.Queries;
 using System;
 using System.Threading.Tasks;
@@ -33,5 +34,10 @@ namespace Strider.Api.Controllers
         [Route("{id}")]
         public async Task<IActionResult> GetByIdAsync(Guid id) 
             => ReturnQueryApi(await _mediator.Send(new GetUserByIdQuery(id)));
+
+        [HttpGet]
+        [Route("myposts/{id}")]
+        public async Task<IActionResult> GetPostsByIdAsync(Guid id, [FromQuery] int page)
+            => ReturnQueryApi(await _mediator.Send(new GetUserLastPostsQuery(id, page, 5)));
     }
 }
