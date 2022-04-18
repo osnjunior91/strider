@@ -13,6 +13,11 @@ namespace Strider.Domain.Queries.Post.Queries
             return x => x.UserId == userId && (x.CreatedAt >= DateTime.Today.Date && x.CreatedAt < DateTime.Today.Date.AddDays(1)) && x.IsDelete == false;
         }
 
+        public static Expression<Func<Infrastructure.Data.Model.Post, bool>> GetById(Guid id)
+        {
+            return x => x.Id == id && x.IsDelete == false;
+        }
+
         public static Expression<Func<Infrastructure.Data.Model.Post, bool>> GetUserLastPost(Guid userId)
         {
             return x => x.UserId == userId && x.IsDelete == false;

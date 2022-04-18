@@ -34,13 +34,13 @@ namespace Strider.Infrastructure.Data.Repository.PostRepository
         public async Task<Post> FirstOrDefaultAsync(Expression<Func<Post, bool>> filter) 
             => await _dataset.SingleOrDefaultAsync(filter);
 
-        public async Task<List<Post>> WhereAsync(Expression<Func<Post, bool>> filter, int skip, int take) 
+        public async Task<List<Post>> WhereAsync(Expression<Func<Post, bool>> filter, int page, int pageSize) 
             => await _dataset.AsNoTracking()
             .AsQueryable()
-            .Skip(skip)
-            .Take(take)
             .Where(filter)
             .OrderByDescending(x => x.CreatedAt)
+            .Skip(page)
+            .Take(pageSize)
             .ToListAsync();
     }
 }

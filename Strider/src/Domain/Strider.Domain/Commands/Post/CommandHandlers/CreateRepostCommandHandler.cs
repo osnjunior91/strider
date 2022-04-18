@@ -24,6 +24,10 @@ namespace Strider.Domain.Commands.Post.CommandHandlers
             if (!validResult.IsValid)
                 return new CommandResult(false, null, validResult.ToString());
 
+            var repostedFrom = await _postRepository.FirstOrDefaultAsync(PostQueries.GetById(request.RepostedFromId));
+            if (repostedFrom == null)
+                return new CommandResult(false, null, "Invalid RepostedFromId");
+
             var postDays = await _postRepository.CountAsync(PostQueries.GetPostsDay(request.UserId));
             if (postDays >= 5)
                 return new CommandResult(false, null, "Not allowed to post more today. Try again tomorrow.");
