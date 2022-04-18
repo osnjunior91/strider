@@ -34,7 +34,7 @@ namespace Strider.Domain.Commands.User.CommandHandlers
             follow.DeleteEntity();
             
             await _followersRepository.UpdateAsync(follow);
-            return new CommandResult(true, null, "Delete success");
+            return new CommandResult(true, null, "Unfollow success");
         }
     }
 }
