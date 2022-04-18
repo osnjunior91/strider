@@ -59,7 +59,23 @@ update-database
 After this there will be these tables in your database - **Followers**, **Posts**, **Users**
 > Note: When you run migrations the project will create 3 users, if you want you can change, you must acess the class **DataContext**, where you can change insert new users.
 
+##  Planning
 
+### Questions about implementation:
+
+ 1. Can you filter by All/following?
+ 2. Can you reply all posts or only your following ?
+ 3. This kind of post will be part of the daily limit ?
+ 4. Do you show reply in user profile ?
+ 5. Reply can have a maximum of 777 characters?
+
+### Solve this problem: 
+
+To solve this problem it will be necessary to create a new business entity with the name Reply, it will have the Id of the original post, text, for this you must create a new command, which will insert these records in the bank, and also a new want that will present this data on the screen, after creating the entity, a new migration must be executed to create the table in the database. After these steps, we must create a controller where it is possible to query the answers through the post Id. And finally we must create unit tests that protect this part of the code.
+
+## Self-critique & scaling
+
+The most fragile routine of the system is the search for posts, because it is the most important and most used routine, and also because it is a text search, which generally presents a low performance, but due to the system architecture, we can create a database only for reading data, perhaps on a NoSQL platform, as these databases have a higher performance in this type of operation, and are also simpler to scale, we can also transform the post search into a decoupled service, where it would be easier monitor and track demand, and also scale the same.
 
 
 MIT
