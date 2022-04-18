@@ -8,13 +8,13 @@ namespace Strider.Domain.Queries.Users.ViewModels
             int followers, int following, int numberOfPost)
         {
             Username = username;
-            Joined = joined;
+            Joined = string.Format("{0:MMMM dd, yyyy}", joined);
             Followers = followers;
             Following = following;
             NumberOfPost = numberOfPost;
         }
         public string Username { get; private set; }
-        public DateTime Joined { get; private set; }
+        public string Joined { get; private set; }
         public int Followers { get; private set; }
         public int Following { get; private set; }
         public int NumberOfPost { get; private set; }

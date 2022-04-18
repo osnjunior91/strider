@@ -2,6 +2,8 @@
 using Strider.Infrastructure.Data.Context;
 using Strider.Infrastructure.Data.Model;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -38,6 +40,11 @@ namespace Strider.Infrastructure.Data.Repository.FollowersRepository
         {
             _dataset.Update(follower);
             await _dataContext.SaveChangesAsync();
+        }
+
+        public async Task<List<Followers>> WhereAsync(Expression<Func<Followers, bool>> filter)
+        {
+            return await _dataset.AsQueryable().Where(filter).ToListAsync();
         }
     }
 }

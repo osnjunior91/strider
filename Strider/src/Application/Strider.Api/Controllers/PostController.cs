@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Nivello.Lib.Nivello.Application;
 using Strider.Domain.Commands.Post.Commands;
 using Strider.Domain.Queries.Post.Queries;
+using System;
 using System.Threading.Tasks;
 
 namespace Strider.Api.Controllers
@@ -33,6 +34,12 @@ namespace Strider.Api.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] string text)
+        {
+            return ReturnQueryApi(await _mediator.Send(new GetAllPostsQuery(text)));
+        }
+        [HttpGet]
+        [Route("following/{userId}")]
+        public async Task<IActionResult> GetAll(Guid userId, [FromQuery] string text)
         {
             return ReturnQueryApi(await _mediator.Send(new GetAllPostsQuery(text)));
         }
