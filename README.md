@@ -1,6 +1,6 @@
 
-# StriderTeste
-## Strider Web Back-end Assessment - 2.4
+# Test
+##Web Back-end Assessment - 2.4
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
@@ -18,7 +18,7 @@ Software stack chosen  :
 
 ##  Whats Including In This Repository
 
-We have implemented below **strider repository**.
+We have implemented below **repository**.
 
 ### Catalog
 #### Post
@@ -50,7 +50,7 @@ You will need the following tools:
 Follow these steps to get your development environment set up: 
 
 1. Clone the repository
-2. You need to access the **Strider.Infrastructure** project and run the migration commands:
+2. You need to access the **/.Infrastructure** project and run the migration commands:
 ```sh
 Add-Migration InitialCreate -o Data/Migrations
 update-database
